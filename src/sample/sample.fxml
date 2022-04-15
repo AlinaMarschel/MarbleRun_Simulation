@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="sceneParent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1090.0" style="-fx-background-color: grey;" fx:controller="sample.Controller" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane fx:id="canvas" layoutX="290.0" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: lightgrey;" />
+      <Button layoutX="18.0" layoutY="14.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="108.0" text="Start" onAction="#startSimulation"/>
+      <Button layoutX="141.0" layoutY="14.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="108.0" text="Stop" onAction="#stopSimulation" />
+      <Button id="createBallButton" layoutX="79.0" layoutY="105.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="108.0" text="Create Ball" onAction="#createMarble" />
+   </children>
+</AnchorPane>
