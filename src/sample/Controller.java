@@ -1,6 +1,9 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 
@@ -13,10 +16,14 @@ public class Controller {
 
     @FXML
     private AnchorPane canvas;
+    @FXML Slider Slider;
+    @FXML ColorPicker Color;
+    @FXML TextField xposition;
+    @FXML TextField yposition;
 
     public void initialize()
     {
-        this.simulation = new Simulation(9.81f);
+        this.simulation = new Simulation(981f);
         this.simulator = new AnimationLoop(this.simulation);
     }
 
@@ -33,9 +40,9 @@ public class Controller {
 
     }
 
-    public void createMarble()
+    public void createMarble() //minimaler wert, sonst ist die kugel in der gui
     {
-        Marble marble = new Marble(400,50,60, Color.BLANCHEDALMOND);
+        Marble marble = new Marble(Double.parseDouble(xposition.getText() ),Double.parseDouble(yposition.getText() ),(int)Slider.getValue(),Color.getValue());
         simulation.addObject(marble);
         canvas.getChildren().addAll(marble.circle);
         System.out.println(marble.toString());

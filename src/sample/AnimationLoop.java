@@ -23,7 +23,7 @@ public class AnimationLoop {
     {
         this.elapsedTime += timeline.getCurrentTime().toSeconds();
         simulation.update();
-    }
+            }
 
     public void startSimulator()
     {

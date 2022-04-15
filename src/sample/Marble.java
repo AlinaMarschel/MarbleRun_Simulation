@@ -3,15 +3,18 @@ package sample;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+import java.util.Vector;
+
 public class Marble extends Object {
 
-    double positionX;
-    double positionY;
+    double positionX; // m
+    double positionY; // m
 
     Color color;
 
-    double radius;
-    float speed;
+    double radius; // m
+    float speed; // m/s
+    double acceleration; // m/s²
 
     Circle circle;
 
