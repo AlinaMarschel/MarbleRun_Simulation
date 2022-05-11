@@ -59,6 +59,16 @@
                         <TextField fx:id="yposition" prefWidth="100.0" />
                      </children>
                   </HBox>
+                  <HBox prefHeight="50.0" prefWidth="270.0" spacing="40.0">
+                     <children>
+                        <Label text="Startgeschwindigkeit:">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="startSpeed" prefWidth="100.0" />
+                     </children>
+                  </HBox>
                   <Button id="createBallButton" mnemonicParsing="false" onAction="#createMarble" prefHeight="47.0" prefWidth="108.0" text="Create Ball">
                      <VBox.margin>
                         <Insets left="80.0" top="80.0" />

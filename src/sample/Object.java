@@ -3,8 +3,8 @@ package sample;
 public class Object
 {
     public boolean isStatic = false;
-    public double positionX;
-    public double positionY;
+    public float positionX;
+    public float positionY;
 
 
 }

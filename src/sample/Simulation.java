@@ -23,27 +23,33 @@ public class Simulation {
                 if(obj instanceof Marble)
                 {
                     Marble marble = ((Marble) obj);
-                    double startPositionY = marble.positionY;
+                    float startPositionY = marble.positionY;
+                    float startPositionX = marble.positionX;
 
-                    float velocity = marble.speed + this.gravity * (1/60f);
-                    double newPositionY = startPositionY + marble.speed * (1/60f) + 0.5 * this.gravity * Math.pow(1/60f, 2);
+                    float velocityY = (marble.speedY + this.gravity * (1/60f));
+                    float newPositionY = (float) (startPositionY + marble.speedY * (1/60f) + 0.5 * this.gravity * Math.pow(1/60f, 2));
+                    //        m                        m               m/s             s                m/s               s^2
 
-                    /* if(startPositionY >= 800 - marble.radius && marble.speed > 0) {
-                        velocity *= -0.8;
-                    } */
-                    if(startPositionY + marble.radius >800 && marble.speed > 0){
+                    float velocityX = (marble.speedX + marble.startSpeed * (1/60f));
+                    float newPositionX = (startPositionX + velocityX * (1/60f));
 
-                        if(marble.speed <15.7f && marble.speed > -15.7f || marble.speed == 0){
-                            marble.speed = 0f;
+                    if(startPositionY + marble.radius >800 && marble.speedY > 0){
+
+                        if(marble.speedY < 15.7f && marble.speedY > -15.7f || marble.speedY == 0){
+                            marble.speedY = 0f;
                             System.out.println("Marble hold detected");
                             break;
                         }
-                        velocity *= -0.8;
+                        velocityX *= 0.8;
+                        velocityY *= -0.8;
+
                     }
-                    if(startPositionY+marble.radius >= 800 && marble.speed == 0){
+
+                    if(startPositionY+marble.radius >= 800 && marble.speedY == 0){
                         break;
                     }
-                    marble.update(newPositionY, velocity);
+
+                    marble.update(newPositionY, velocityY, newPositionX, velocityX);
                 }
 
             }

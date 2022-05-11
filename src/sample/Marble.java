@@ -3,27 +3,33 @@ package sample;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-import java.util.Vector;
-
 public class Marble extends Object {
 
-    double positionX; // m
-    double positionY; // m
+    float positionX; // m
+    float positionY; // m
 
     Color color;
 
-    double radius; // m
-    float speed; // m/s
+    float radius; // m
+
+    float speedX; // m/s
+    float speedY; // m/s
+
+    float startSpeed; // m/s
+
     double acceleration; // m/s²
 
     Circle circle;
 
-    public Marble(double positionX, double positionY, int radius, Color color)
+    public Marble(float positionX, float positionY, int radius, Color color, float startSpeed)
     {
         this.positionX = positionX;
         this.positionY = positionY;
+
         this.radius = radius;
         this.color = color;
+
+        this.startSpeed = startSpeed;
 
         this.circle = new Circle(this.positionX, this.positionY, this.radius, this.color);
     }
@@ -33,12 +39,17 @@ public class Marble extends Object {
         return "Position: " + this.positionX + "|" + this.positionY + " Radius: " + this.radius;
     }
 
-    public void update(double newPositionY, float newSpeed)
+    public void update(float newPositionY, float newSpeedY, float newPositionX, float newSpeedX)
     {
+
+        this.circle.setCenterX(newPositionX);
+        this.positionX = newPositionX;
+
         this.circle.setCenterY(newPositionY);
         this.positionY = newPositionY;
 
-        this.speed = newSpeed;
+        this.speedY = newSpeedY;
+        this.speedX = newSpeedX;
 
         System.out.println(this.positionY);
     }
