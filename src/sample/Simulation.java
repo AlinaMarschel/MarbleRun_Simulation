@@ -27,15 +27,16 @@ public class Simulation {
                     float startPositionX = marble.positionX;
 
                     float velocityY = (marble.speedY + this.gravity * (1/60f));
-                    float newPositionY = (float) (startPositionY + marble.speedY * (1/60f) + 0.5 * this.gravity * Math.pow(1/60f, 2));
-                    //        m                        m               m/s             s                m/s               s^2
+                    float newPositionY = (float) (startPositionY + (marble.speedY * 100) * (1/60f) + 0.5 * (this.gravity * 100) * Math.pow(1/60f, 2));
+                    //        cm                        cm               m/s             s                            m/s^2         s^2
 
                     float velocityX = (marble.speedX + marble.startSpeed * (1/60f));
-                    float newPositionX = (startPositionX + velocityX * (1/60f));
+                    float newPositionX = (startPositionX + (velocityX * 100) * (1/60f));
+                    //       cm             cm              m/s           s
 
-                    if(startPositionY + marble.radius >800 && marble.speedY > 0){
+                    if(startPositionY + marble.radius > 800 && marble.speedY > 0){
 
-                        if(marble.speedY < 15.7f && marble.speedY > -15.7f || marble.speedY == 0){
+                        if(marble.speedY < 0.3f && marble.speedY > -0.3f || marble.speedY == 0){
                             marble.speedY = 0f;
                             System.out.println("Marble hold detected");
                             break;
@@ -47,7 +48,7 @@ public class Simulation {
 
                     if(startPositionY+marble.radius >= 800 && marble.speedY == 0){
                         break;
-                    }
+                   }
 
                     marble.update(newPositionY, velocityY, newPositionX, velocityX);
                 }
