@@ -20,6 +20,7 @@ public class Controller {
     @FXML TextField xposition;
     @FXML TextField yposition;
     @FXML TextField startSpeed;
+    @FXML TextField angle;
 
     public void initialize()
     {
@@ -67,7 +68,7 @@ public class Controller {
     // Hindernisse werden der Scene hinzugefügt
     public void createObstacle()
     {
-        Obstacle obstacle = new Obstacle(200, 350, 400, 10, -10);
+        Obstacle obstacle = new Obstacle(200, 350, 400, 10, Float.parseFloat(angle.getText() ));
         simulation.addObject(obstacle);
         canvas.getChildren().addAll(obstacle.box);
     }

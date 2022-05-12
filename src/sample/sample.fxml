@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import sample.NumberTextField?>
 <AnchorPane fx:id="sceneParent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1090.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <AnchorPane fx:id="canvas" layoutX="290.0" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: lightgrey;" />
@@ -46,7 +47,7 @@
                               <Font size="26.0" />
                            </font>
                         </Label>
-                        <TextField prefWidth="100.0" fx:id="xposition" />
+                        <NumberTextField prefWidth="100.0" fx:id="xposition" />
                      </children>
                   </HBox>
                   <HBox prefHeight="50.0" prefWidth="270.0" spacing="40.0">
@@ -56,17 +57,27 @@
                               <Font size="26.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="yposition" prefWidth="100.0" />
+                        <NumberTextField fx:id="yposition" prefWidth="100.0" />
                      </children>
                   </HBox>
                   <HBox prefHeight="50.0" prefWidth="270.0" spacing="40.0">
                      <children>
-                        <Label text="Startgeschwindigkeit:">
+                        <Label text="Speed:">
                            <font>
                               <Font size="26.0" />
                            </font>
                         </Label>
                         <TextField fx:id="startSpeed" prefWidth="100.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="50.0" prefWidth="270.0" spacing="40.0">
+                     <children>
+                        <Label text="Angle:">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Label>
+                        <NumberTextField fx:id="angle" prefWidth="100.0" />
                      </children>
                   </HBox>
                   <Button id="createBallButton" mnemonicParsing="false" onAction="#createMarble" prefHeight="47.0" prefWidth="108.0" text="Create Ball">
