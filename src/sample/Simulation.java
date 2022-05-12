@@ -47,7 +47,9 @@ public class Simulation {
                     }
 
                     if(startPositionY+marble.radius >= 800 && marble.speedY == 0){
-                        break;
+                        velocityY = 0;
+                        newPositionY = startPositionY;
+                        velocityX *= 0.8;
                    }
 
                     marble.update(newPositionY, velocityY, newPositionX, velocityX);
