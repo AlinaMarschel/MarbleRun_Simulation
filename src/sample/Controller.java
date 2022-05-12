@@ -40,18 +40,36 @@ public class Controller {
 
     }
 
-    public void createMarble() //minimaler wert, sonst ist die kugel in der gui
+    // Kugeln werden erstellt und der Scene hinzugefügt bei Button Click
+    public void createMarble()
     {
-        Marble marble = new Marble(
-                Float.parseFloat(xposition.getText() ),
-                Float.parseFloat(yposition.getText() ),
-                (int)Slider.getValue(),
-                Color.getValue(),
-                Float.parseFloat(startSpeed.getText() )
-        );
-        simulation.addObject(marble);
-        canvas.getChildren().addAll(marble.circle);
-        System.out.println(marble.toString());
+        // Abfrage ob die Textfelder ausgefüllt sind
+        if(xposition.getText().isEmpty() | yposition.getText().isEmpty() | startSpeed.getText().isEmpty())
+        {
+            System.out.println("Bitte Werte eintragen");
+        } else
+        {
+            Marble marble = new Marble(
+                    Float.parseFloat(xposition.getText() ),
+                    Float.parseFloat(yposition.getText() ),
+                    (int)Slider.getValue(),
+                    Color.getValue(),
+                    Float.parseFloat(startSpeed.getText() )
+            );
+            simulation.addObject(marble);
+            canvas.getChildren().addAll(marble.circle);
+            System.out.println(marble.toString());
+        }
+
+
+    }
+
+    // Hindernisse werden der Scene hinzugefügt
+    public void createObstacle()
+    {
+        Obstacle obstacle = new Obstacle(200, 350, 400, 10, -10);
+        simulation.addObject(obstacle);
+        canvas.getChildren().addAll(obstacle.box);
     }
 
 

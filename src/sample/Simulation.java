@@ -57,7 +57,6 @@ public class Simulation {
 
         }
     }
-
     public void addObject(Object obj)
     {
         this.objectsInSimulation.add(obj);
