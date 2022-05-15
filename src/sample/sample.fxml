@@ -15,14 +15,14 @@
    <children>
       <AnchorPane fx:id="canvas" layoutX="290.0" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: lightgrey;">
          <children>
-            <Label layoutX="574.0" layoutY="14.0" text="Speed:" />
-            <Label fx:id="setTextSpeed" layoutX="624.0" layoutY="14.0" text="" />
+            <Label layoutX="545.0" layoutY="14.0" text="Speed:" />
+            <Label fx:id="setTextSpeed" layoutX="590.0" layoutY="14.0" text="" />
             <Label layoutX="674.0" layoutY="14.0" text="Position X:" />
             <Label fx:id="setTextPosX" layoutX="744.0" layoutY="14.0" text="" />
          </children></AnchorPane>
-      <AnchorPane prefHeight="800.0" prefWidth="290.0">
+      <AnchorPane layoutX="7.0" prefHeight="510.0" prefWidth="290.0">
          <children>
-            <VBox prefHeight="800.0" prefWidth="290.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <VBox prefHeight="876.0" prefWidth="290.0" spacing="20.0" AnchorPane.bottomAnchor="504.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Label prefHeight="52.0" prefWidth="300.0" text="Marble Run" textAlignment="CENTER">
                      <font>
@@ -47,7 +47,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Slider fx:id="Slider" blockIncrement="40.0" majorTickUnit="40.0" max="200.0" min="10.0" minorTickCount="40" prefHeight="38.0" prefWidth="262.0" showTickLabels="true" showTickMarks="true" value="5.0" />
+                        <Slider fx:id="Slider" max="30.0" min="10.0" minorTickCount="5" prefHeight="38.0" prefWidth="262.0" showTickLabels="true" showTickMarks="true" value="5.0" />
                         <VBox>
                            <children>
                               <Label text="Y-Position:">
@@ -74,7 +74,7 @@
                         </VBox>
                         <VBox>
                            <children>
-                              <Label text="Speed:">
+                              <Label text="Speed (m/s):">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -111,13 +111,28 @@
                      </VBox.margin>
                   </Button>
                   </HBox>
+                  <Label layoutX="20.0" layoutY="419.0" prefHeight="14.0" prefWidth="270.0" text="Umgebung" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <VBox layoutX="20.0" layoutY="433.0">
+                     <children>
+                        <Label prefHeight="27.0" prefWidth="98.0" text="Wind (m/s):">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="angle1" prefWidth="100.0" promptText="0" text="0" />
+                     </children>
+                  </VBox>
                   <HBox prefHeight="0.0" prefWidth="270.0" spacing="80.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#startSimulation" prefHeight="47.0" prefWidth="108.0" text="Start" />
                         <Button mnemonicParsing="false" onAction="#stopSimulation" prefHeight="47.0" prefWidth="108.0" text="Stop" />
                      </children>
                      <VBox.margin>
-                        <Insets top="200.0" />
+                        <Insets top="10.0" />
                      </VBox.margin>
                   </HBox>
                </children>

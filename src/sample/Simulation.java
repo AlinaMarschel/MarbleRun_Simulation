@@ -7,6 +7,8 @@ public class Simulation {
     float gravity;
     int frames = 0;
 
+    float wind = 2; // m/s
+
     Controller controller;
 
     ArrayList<Object> objectsInSimulation = new ArrayList<>();
@@ -47,7 +49,6 @@ public class Simulation {
                         }
                     }
                 }
-
             }
             //Wenn das Objekt nicht statisch ist wird berechnet
             if(!object1.isStatic)
@@ -65,7 +66,7 @@ public class Simulation {
                     //        cm                        cm               m/s             s                            m/s^2         s^2
 
                     // m/s wird mit 100 multipliziert und dadurch in cm/s umgerechnet.
-                    // float velocityX = (marble.speedX + marble.startSpeed * (1/60f));
+                    float velocityX = (marble.speedX + wind * (1/60f));
                     float newPositionX = (startPositionX + (marble.speedX * 100) * (1/60f));
                     //       cm             cm                  m/s           s
 
@@ -99,8 +100,8 @@ public class Simulation {
                         }
                    }
 
-                    marble.update(newPositionY, velocityY, newPositionX, marble.speedX);
-                    controller.setText(marble.speedX, newPositionX);
+                    marble.update(newPositionY, velocityY, newPositionX, velocityX);
+                    controller.setText(marble.speedY, newPositionX);
                 }
             }
         }
@@ -118,6 +119,5 @@ public class Simulation {
     {
         this.objectsInSimulation.add(obj);
     }
-
 
 }
