@@ -29,9 +29,14 @@ public class Obstacle extends Object {
         isStatic = true;
 
         this.box = new Rectangle(this.positionX, this.positionY, this.width, this.height);
-        this.boundingBox = this.box.getBoundsInParent();
         this.box.setRotate(this.angleOfBox);
+        this.boundingBox = this.box.getBoundsInParent();
         this.box.setFill(this.color);
+
     }
+
+//    public void update() {
+//        this.boundingBox = this.box.getBoundsInParent();
+//    }
 
 }

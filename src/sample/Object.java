@@ -8,5 +8,7 @@ public class Object
     public float positionX;
     public float positionY;
 
+    boolean isCollided = false;
+
     public Bounds boundingBox;
 }

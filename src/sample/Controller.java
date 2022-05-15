@@ -2,6 +2,7 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -21,11 +22,14 @@ public class Controller {
     @FXML TextField yposition;
     @FXML TextField startSpeed;
     @FXML TextField angle;
+    @FXML Label setTextSpeed;
+    @FXML Label setTextPosX;
 
     public void initialize()
     {
-        this.simulation = new Simulation(9.81f);
+        this.simulation = new Simulation(9.81f, this);
         this.simulator = new AnimationLoop(this.simulation);
+
         //createObstacle();
     }
 
@@ -46,7 +50,7 @@ public class Controller {
     public void createMarble()
     {
         // Abfrage ob die Textfelder ausgefüllt sind
-        if(xposition.getText().isEmpty() | yposition.getText().isEmpty() | startSpeed.getText().isEmpty())
+        if(xposition.getText().isEmpty() | yposition.getText().isEmpty() | startSpeed.getText().isEmpty() | angle.getText().isEmpty())
         {
             System.out.println("Bitte Werte eintragen");
         } else
@@ -70,9 +74,14 @@ public class Controller {
     public void createObstacle()
     {
         Obstacle obstacle = new Obstacle(200, 350, 400, 10, Float.parseFloat(angle.getText() ));
+        obstacle.box.getBoundsInParent();
         simulation.addObject(obstacle);
         canvas.getChildren().addAll(obstacle.box);
     }
 
+    public void setText(float speed, float posX) {
+        setTextSpeed.setText(Float.toString(speed));
+        setTextPosX.setText(Float.toString(posX));
+    }
 
 }
