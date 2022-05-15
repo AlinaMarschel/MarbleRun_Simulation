@@ -32,6 +32,7 @@ public class Marble extends Object {
         this.startSpeed = startSpeed;
 
         this.circle = new Circle(this.positionX, this.positionY, this.radius, this.color);
+        this.boundingBox = this.circle.getBoundsInParent();
     }
 
     public String toString()
@@ -41,17 +42,24 @@ public class Marble extends Object {
 
     public void update(float newPositionY, float newSpeedY, float newPositionX, float newSpeedX)
     {
-
         this.circle.setCenterX(newPositionX);
         this.positionX = newPositionX;
+
+//        float translateX = newPositionX - this.positionX;
+//        this.circle.setTranslateX(translateX);
+//
+//        float translateY = newPositionY - this.positionY;
+//        this.circle.setTranslateY(translateY);
+
 
         this.circle.setCenterY(newPositionY);
         this.positionY = newPositionY;
 
         this.speedY = newSpeedY;
         this.speedX = newSpeedX;
+        this.boundingBox = this.circle.getBoundsInParent();
 
-        System.out.println(this.positionY);
+        //System.out.println(this.positionY);
     }
 
 }

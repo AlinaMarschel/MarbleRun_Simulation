@@ -26,6 +26,7 @@ public class Controller {
     {
         this.simulation = new Simulation(9.81f);
         this.simulator = new AnimationLoop(this.simulation);
+        //createObstacle();
     }
 
     public void startSimulation()
