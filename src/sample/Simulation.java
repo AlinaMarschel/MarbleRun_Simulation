@@ -61,7 +61,7 @@ public class Simulation {
 
                     // m/s wird mit 100 multipliziert und dadurch in cm/s umgerechnet.
                     // Berechnung der Geschwindigkeit in Y Richtung
-                    float velocityY = (marble.speedY + this.gravity * (1/60f));
+                    float velocityY = (marble.speedY + this.gravity * (1/60f) + marble.startSpeedY);
                     float newPositionY = (float) (startPositionY + (marble.speedY * 100) * (1/60f) + 0.5 * (this.gravity * 100) * Math.pow(1/60f, 2));
                     //        cm                        cm               m/s             s                            m/s^2         s^2
 
@@ -101,7 +101,7 @@ public class Simulation {
                    }
 
                     marble.update(newPositionY, velocityY, newPositionX, velocityX);
-                    controller.setText(marble.speedY, newPositionX);
+                    controller.setText(marble.speedX, newPositionX, marble.speedY, newPositionY);
                 }
             }
         }

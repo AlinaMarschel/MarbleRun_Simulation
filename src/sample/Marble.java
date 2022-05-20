@@ -15,13 +15,14 @@ public class Marble extends Object {
     float speedX; // m/s
     float speedY; // m/s
 
-    float startSpeed; // m/s
+    float startSpeedX; // m/s
+    float startSpeedY; // m/s
 
     double acceleration; // m/s²
 
     Circle circle;
 
-    public Marble(float positionX, float positionY, int radius, Color color, float startSpeed)
+    public Marble(float positionX, float positionY, int radius, Color color, float startSpeedX, float startSpeedY)
     {
         this.positionX = positionX;
         this.positionY = positionY;
@@ -29,7 +30,8 @@ public class Marble extends Object {
         this.radius = radius;
         this.color = color;
 
-        this.speedX = startSpeed;
+        this.speedX = startSpeedX;
+        this.startSpeedY = startSpeedY;
 
         this.circle = new Circle(this.positionX, this.positionY, this.radius, this.color);
         this.boundingBox = this.circle.getBoundsInParent();

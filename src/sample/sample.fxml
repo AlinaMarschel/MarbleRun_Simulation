@@ -15,10 +15,14 @@
    <children>
       <AnchorPane fx:id="canvas" layoutX="290.0" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: lightgrey;">
          <children>
-            <Label layoutX="545.0" layoutY="14.0" text="Speed:" />
-            <Label fx:id="setTextSpeed" layoutX="590.0" layoutY="14.0" text="" />
+            <Label layoutX="545.0" layoutY="14.0" text="Speed X:" />
+            <Label fx:id="setTextSpeedX" layoutX="603.0" layoutY="14.0" prefHeight="17.0" prefWidth="56.0" text="" />
             <Label layoutX="674.0" layoutY="14.0" text="Position X:" />
             <Label fx:id="setTextPosX" layoutX="744.0" layoutY="14.0" text="" />
+            <Label layoutX="546.0" layoutY="40.0" text="Speed Y:" />
+            <Label fx:id="setTextSpeedY" layoutX="603.0" layoutY="40.0" prefHeight="17.0" prefWidth="56.0" text="" />
+            <Label layoutX="674.0" layoutY="40.0" text="Position Y:" />
+            <Label fx:id="setTextPosY" layoutX="744.0" layoutY="40.0" prefHeight="17.0" prefWidth="42.0" text="" />
          </children></AnchorPane>
       <AnchorPane layoutX="7.0" prefHeight="510.0" prefWidth="290.0">
          <children>
@@ -34,17 +38,17 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <VBox prefHeight="277.0" prefWidth="270.0">
+                  <VBox prefHeight="311.0" prefWidth="270.0">
                      <children>
                         <Label prefHeight="21.0" prefWidth="190.0" text="Color:">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="16.0" />
                            </font>
                         </Label>
-                        <ColorPicker fx:id="Color" prefHeight="29.0" prefWidth="194.0" />
+                        <ColorPicker fx:id="Color" prefHeight="53.0" prefWidth="131.0" />
                         <Label prefHeight="27.0" prefWidth="42.0" text="Size:">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="16.0" />
                            </font>
                         </Label>
                         <Slider fx:id="Slider" max="30.0" min="10.0" minorTickCount="5" prefHeight="38.0" prefWidth="262.0" showTickLabels="true" showTickMarks="true" value="5.0" />
@@ -52,7 +56,7 @@
                            <children>
                               <Label text="Y-Position:">
                                  <font>
-                                    <Font size="18.0" />
+                                    <Font size="16.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="yposition" prefWidth="100.0" promptText="100" text="100">
@@ -66,22 +70,36 @@
                            <children>
                               <Label text="X-Position:">
                                  <font>
-                                    <Font size="18.0" />
+                                    <Font size="16.0" />
                                  </font>
                               </Label>
                               <TextField prefWidth="100.0" promptText="250" text="250" fx:id="xposition" />
                            </children>
                         </VBox>
-                        <VBox>
+                        <HBox>
                            <children>
-                              <Label text="Speed (m/s):">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="startSpeed" prefWidth="100.0" promptText="1" text="1" />
+                              <VBox>
+                                 <children>
+                                    <Label text="Speed X (m/s):">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="startSpeedX" prefHeight="25.0" prefWidth="112.0" promptText="1" text="1" />
+                                 </children>
+                              </VBox>
+                              <VBox>
+                                 <children>
+                                    <Label text="Speed Y (m/s):">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="startSpeedY" prefHeight="25.0" prefWidth="117.0" promptText="1" text="1" />
+                                 </children>
+                              </VBox>
                            </children>
-                        </VBox>
+                        </HBox>
                      </children>
                   </VBox>
                   <Label prefHeight="14.0" prefWidth="270.0" text="Ebene Einstellungen" textAlignment="CENTER">
@@ -93,12 +111,36 @@
                      <children>
                         <Label text="Angle:">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="16.0" />
                            </font>
                         </Label>
                         <TextField fx:id="angle" prefWidth="100.0" promptText="0" text="0" />
                      </children>
                   </VBox>
+                  <HBox>
+                     <children>
+                        <VBox>
+                           <children>
+                              <Label text="X-Position">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="obstacleX" prefWidth="100.0" promptText="0" text="250" />
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <Label text="Y-Position:">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="obstacleY" prefWidth="100.0" promptText="0" text="400" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
                   <HBox>
                   <Button id="createBallButton" mnemonicParsing="false" onAction="#createMarble" prefHeight="11.0" prefWidth="108.0" text="Erstelle Kugel">
                      <VBox.margin>

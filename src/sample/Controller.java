@@ -16,14 +16,27 @@ public class Controller {
 
     @FXML
     private AnchorPane canvas;
+
+    // Marble Properties
     @FXML Slider Slider;
     @FXML ColorPicker Color;
     @FXML TextField xposition;
     @FXML TextField yposition;
-    @FXML TextField startSpeed;
+    @FXML TextField startSpeedX;
+    @FXML TextField startSpeedY;
+
+    // Obstacle Properties
+    @FXML TextField obstacleX;
+    @FXML TextField obstacleY;
     @FXML TextField angle;
-    @FXML Label setTextSpeed;
+
+    // Show Speed and Position
+    @FXML Label setTextSpeedX;
     @FXML Label setTextPosX;
+    @FXML Label setTextSpeedY;
+    @FXML Label setTextPosY;
+
+
 
     public void initialize()
     {
@@ -50,17 +63,18 @@ public class Controller {
     public void createMarble()
     {
         // Abfrage ob die Textfelder ausgefüllt sind
-        if(xposition.getText().isEmpty() | yposition.getText().isEmpty() | startSpeed.getText().isEmpty() | angle.getText().isEmpty())
+        if(xposition.getText().isEmpty() | yposition.getText().isEmpty() | startSpeedX.getText().isEmpty() | angle.getText().isEmpty())
         {
             System.out.println("Bitte Werte eintragen");
         } else
         {
             Marble marble = new Marble(
-                    Float.parseFloat(xposition.getText() ),
-                    Float.parseFloat(yposition.getText() ),
-                    (int)Slider.getValue(),
-                    Color.getValue(),
-                    Float.parseFloat(startSpeed.getText() )
+                    Float.parseFloat(xposition.getText()),   // x-Position
+                    Float.parseFloat(yposition.getText()),   // y-Position
+                    (int)Slider.getValue(),                  // radius
+                    Color.getValue(),                        // Farbe
+                    Float.parseFloat(startSpeedX.getText()), // x-StartSpeed
+                    Float.parseFloat(startSpeedY.getText())  // y-StartSpeed
             );
             simulation.addObject(marble);
             canvas.getChildren().addAll(marble.circle);
@@ -73,15 +87,24 @@ public class Controller {
     // Hindernisse werden der Scene hinzugefügt
     public void createObstacle()
     {
-        Obstacle obstacle = new Obstacle(200, 350, 400, 10, Float.parseFloat(angle.getText() ));
+        Obstacle obstacle = new Obstacle(
+                Float.parseFloat(obstacleX.getText() ),
+                Float.parseFloat(obstacleY.getText() ),
+                400,
+                10,
+                Float.parseFloat(angle.getText() ));
         obstacle.box.getBoundsInParent();
         simulation.addObject(obstacle);
         canvas.getChildren().addAll(obstacle.box);
+        canvas.getChildren().addAll(obstacle.line);
     }
 
-    public void setText(float speed, float posX) {
-        setTextSpeed.setText(Float.toString(speed));
+    public void setText(float speedX, float posX, float speedY, float posY) {
+        setTextSpeedX.setText(Float.toString(speedX));
+        setTextSpeedY.setText(Float.toString(speedY));
         setTextPosX.setText(Float.toString(posX));
+        setTextPosY.setText(Float.toString(posY));
+
     }
 
 }
