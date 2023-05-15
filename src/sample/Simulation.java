@@ -23,12 +23,10 @@ public class Simulation {
     }
 
     // Höhe der Scene wird berechnet
-    public double getSceneHeight() {
-        double sceneHeight = scene.getHeight();
-        double obenY = scene.localToScene(0,0).getY();
-        double untenY= obenY + sceneHeight;
-
-        return untenY;
+    public double getSceneWidth() {
+        double sceneWidth = scene.getWidth();
+        double sceneWitdhUmgerechnet = sceneWidth/100;
+        return sceneWitdhUmgerechnet;
     }
 
     public void update()
@@ -87,6 +85,20 @@ public class Simulation {
                             marble.geschwindigkeit.y = 0;
                             strecke.y = radius;
                         }
+                    }
+
+                    if(strecke.x - radius > getSceneWidth() - radius) {
+                        System.out.println("Wand");
+                        if(geschwindigkeit.x < 0.3f && geschwindigkeit.x > -0.3f || geschwindigkeit.x == 0) {
+                            marble.geschwindigkeit.x = 0;
+                            break;
+                        }
+                        double h = Math.abs(geschwindigkeit.x) * -0.8;
+                        geschwindigkeit.x = h;
+
+                        // Energieverlust
+                        geschwindigkeit.x *= -0.8;
+                        geschwindigkeit.y *= -0.8;
                     }
 
                     marble.update(strecke, geschwindigkeit);
