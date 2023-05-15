@@ -5,8 +5,7 @@ import javafx.geometry.Bounds;
 public class Object
 {
     public boolean isStatic = false;
-    public float positionX;
-    public float positionY;
+    public double radius;
 
     boolean isCollided = false;
 

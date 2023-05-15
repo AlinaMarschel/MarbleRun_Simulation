@@ -51,21 +51,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Slider fx:id="Slider" max="30.0" min="10.0" minorTickCount="5" prefHeight="38.0" prefWidth="262.0" showTickLabels="true" showTickMarks="true" value="5.0" />
-                        <VBox>
-                           <children>
-                              <Label text="Y-Position:">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="yposition" prefWidth="100.0" promptText="100" text="100">
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
-                              </TextField>
-                           </children>
-                        </VBox>
+                        <Slider fx:id="Slider" max="30" min="5" minorTickCount="5" prefHeight="38.0" prefWidth="262.0" showTickLabels="true" showTickMarks="true" value="5.0" />
                         <VBox>
                            <children>
                               <Label text="X-Position:">
@@ -74,6 +60,20 @@
                                  </font>
                               </Label>
                               <TextField prefWidth="100.0" promptText="250" text="250" fx:id="xposition" />
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <Label text="Y-Position:">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="yposition" prefWidth="100.0" promptText="600" text="600">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </TextField>
                            </children>
                         </VBox>
                         <HBox>
@@ -160,12 +160,12 @@
                   </Label>
                   <VBox layoutX="20.0" layoutY="433.0">
                      <children>
-                        <Label prefHeight="27.0" prefWidth="98.0" text="Wind (m/s):">
+                        <Label prefHeight="27.0" prefWidth="120.0" text="Wind X (m/s):">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="angle1" prefWidth="100.0" promptText="0" text="0" />
+                        <TextField fx:id="windX" prefWidth="100.0" promptText="0" text="0" />
                      </children>
                   </VBox>
                   <HBox prefHeight="0.0" prefWidth="270.0" spacing="80.0">

@@ -10,6 +10,7 @@ public class AnimationLoop {
     private Timeline timeline;
     float elapsedTime;
     Simulation simulation;
+    Marble marble;
 
     public AnimationLoop(Simulation simulation)
     {

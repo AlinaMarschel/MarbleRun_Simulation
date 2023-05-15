@@ -15,6 +15,5 @@ public class NumberTextField extends TextField {
             super.replaceSelection(text);
         }
     }
-
 }
 

@@ -4,31 +4,26 @@ package sample;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.transform.Rotate;
 
 public class Obstacle extends Object {
 
-    Rotate rotate = new Rotate();
-
-    Line line = new Line();
-
-    float positionX;
-    float positionY;
+    double positionX;
+    double positionY;
     double angleOfBox;
 
-    float edgeTopLeft;
-    float edgeTopRight;
-    float edgeBottomLeft;
-    float edgeBottomRight;
+    double width;
+    double height;
 
-
-    float width;
-    float height;
+    double edgeTopLeft;
+    double edgeTopRight;
+    double edgeBottomLeft;
+    double edgeBottomRight;
 
     Color color;
     Rectangle box;
+    Line line;
 
-    public Obstacle(float positionX, float positionY, float width, float height, double angleOfBox) {
+    public Obstacle(double positionX, double positionY, double width, double height, double angleOfBox) {
 
         this.positionX = positionX;
         this.positionY = positionY;
@@ -45,15 +40,10 @@ public class Obstacle extends Object {
         //this.rotate.setAngle(this.angleOfBox);
         //this.box.getTransforms().addAll(rotate);
 
-//        this.edgeTopLeft = (float) this.box.getBoundsInParent().getMinX();
-//        this.edgeTopRight = (float) this.box.getBoundsInParent().getMaxX();
-//        this.edgeBottomLeft = (float) this.box.getBoundsInParent().getMinY() + this.height;
-//        this.edgeBottomRight = (float) this.box.getBoundsInParent().getMaxY();
-
-        this.edgeTopLeft = (float) this.box.getBoundsInParent().getMinX();
-        this.edgeTopRight = (float) this.box.getBoundsInParent().getMaxX();
-        this.edgeBottomLeft = (float) this.box.getBoundsInParent().getMinY() + this.height;
-        this.edgeBottomRight = (float) this.box.getBoundsInParent().getMaxY();
+        this.edgeTopLeft = (double) this.box.getBoundsInParent().getMinX();
+        this.edgeTopRight = (double) this.box.getBoundsInParent().getMaxX();
+        this.edgeBottomLeft = (double) this.box.getBoundsInParent().getMinY() + this.height;
+        this.edgeBottomRight = (double) this.box.getBoundsInParent().getMaxY();
 
         this.line = new Line(this.edgeTopLeft, this.edgeBottomLeft - this.box.getHeight(), this.edgeTopRight, this.edgeBottomRight - this.box.getHeight());
 
