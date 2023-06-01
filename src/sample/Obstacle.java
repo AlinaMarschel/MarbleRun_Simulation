@@ -14,10 +14,10 @@ public class Obstacle extends Object {
     double width;
     double height;
 
-    double edgeTopLeft;
-    double edgeTopRight;
-    double edgeBottomLeft;
-    double edgeBottomRight;
+    double cornerTopLeft;
+    double cornerTopRight;
+    double cornerBottomLeft;
+    double cornerBottomRight;
 
     Color color;
     Rectangle box;
@@ -29,7 +29,6 @@ public class Obstacle extends Object {
         this.positionY = positionY;
         this.width = width;
         this.height = height;
-
         this.angleOfBox = angleOfBox;
 
         this.color = Color.ALICEBLUE;
@@ -37,26 +36,30 @@ public class Obstacle extends Object {
 
         this.box = new Rectangle(this.positionX, this.positionY, this.width, this.height);
         this.box.setRotate(this.angleOfBox);
-        //this.rotate.setAngle(this.angleOfBox);
-        //this.box.getTransforms().addAll(rotate);
 
-        this.edgeTopLeft = (double) this.box.getBoundsInParent().getMinX();
-        this.edgeTopRight = (double) this.box.getBoundsInParent().getMaxX();
-        this.edgeBottomLeft = (double) this.box.getBoundsInParent().getMinY() + this.height;
-        this.edgeBottomRight = (double) this.box.getBoundsInParent().getMaxY();
+        this.cornerTopLeft = (double) this.box.getBoundsInParent().getMinX();
+        this.cornerTopRight = (double) this.box.getBoundsInParent().getMaxX();
+        this.cornerBottomLeft = (double) this.box.getBoundsInParent().getMinY() + this.height;
+        this.cornerBottomRight = (double) this.box.getBoundsInParent().getMaxY();
 
-        this.line = new Line(this.edgeTopLeft, this.edgeBottomLeft - this.box.getHeight(), this.edgeTopRight, this.edgeBottomRight - this.box.getHeight());
+        double x1 = this.box.getBoundsInParent().getMinX();
+        double x2 = x1 + Math.sin(Math.toRadians(this.angleOfBox)) * this.height; // Länge der Gegenkathete
+        double x4 = this.box.getBoundsInParent().getMaxX();
+        double x3 = x4 - (x2 -x1);
+
+        double y1 = this.box.getBoundsInParent().getMinY();
+        double y2 = y1 + Math.cos(Math.toRadians(this.angleOfBox)) * this.height; // Länge der Ankathete
+        double y4 = this.box.getBoundsInParent().getMaxY();
+        double y3 = y4 - (y2 - y1);
+
+        this.line = new Line(x2, y1, x4, y3);
 
         this.boundingBox = this.box.getBoundsInParent();
         this.box.setFill(this.color);
 
-        System.out.println(this.box.getBoundsInParent());
-        System.out.println("Oben links: " + this.edgeTopLeft + " Oben rechts: " + this.edgeTopRight + " Unten links: " + this.edgeBottomLeft + "Oben rechts: " + this.edgeBottomRight);
-        System.out.println(this.line);
+//        System.out.println(this.box.getBoundsInParent());
+//        System.out.println("Oben links: " + this.cornerTopLeft + " Oben rechts: " + this.cornerTopRight + " Unten links: " + this.cornerBottomLeft + "Oben rechts: " + this.cornerBottomRight);
+//        System.out.println(this.line);
+        System.out.println(Math.cos(Math.toRadians(20)) * 10);
     }
-
-//    public void update() {
-//        this.boundingBox = this.box.getBoundsInParent();
-//    }
-
 }

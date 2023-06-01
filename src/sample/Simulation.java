@@ -24,8 +24,7 @@ public class Simulation {
 
     // Höhe der Scene wird berechnet
     public double getSceneWidth() {
-        double sceneWidth = scene.getWidth();
-        double sceneWitdhUmgerechnet = sceneWidth/100;
+        double sceneWitdhUmgerechnet = 800/100;
         return sceneWitdhUmgerechnet;
     }
 
@@ -62,22 +61,19 @@ public class Simulation {
                     Vector2D geschwindigkeit = new Vector2D(vecStartGeschwindigkeit.x + marble.wind.x * zeit,
                                                             vecStartGeschwindigkeit.y + this.gravity.y * zeit);
 
-                    // Kollisionsabfrage mit dem Boden in Y-Richtung
 
                     double radius = marble.radius / 100;
 
+                    // Kollisionsabfrage mit dem Boden in Y-Richtung
                     if(strecke.y < 0 + radius) {
-
                         if(geschwindigkeit.y < 0.3f && geschwindigkeit.y > -0.3f || geschwindigkeit.y == 0) {
                             marble.geschwindigkeit.y = 0;
                             break;
                         }
-
+                        // Energieverlust
                         double h = Math.abs(geschwindigkeit.y) * -0.8;
                         geschwindigkeit.y = h;
-
-                        // Energieverlust
-                        geschwindigkeit.x *= 0.8;
+                        // Abprallen am Boden
                         geschwindigkeit.y *= -0.8;
 
                         // Kugel soll am Boden liegen bleiben
@@ -87,18 +83,38 @@ public class Simulation {
                         }
                     }
 
-                    if(strecke.x - radius > getSceneWidth() - radius) {
-                        System.out.println("Wand");
+                    // Kollisionsabfrage rechte wand
+                    if(strecke.x >= getSceneWidth() - radius) {
                         if(geschwindigkeit.x < 0.3f && geschwindigkeit.x > -0.3f || geschwindigkeit.x == 0) {
                             marble.geschwindigkeit.x = 0;
                             break;
                         }
+                        // Energieverlust
                         double h = Math.abs(geschwindigkeit.x) * -0.8;
-                        geschwindigkeit.x = h;
+                        geschwindigkeit.x = -h;
+                        // Abprallen an der Wand
+                        geschwindigkeit.x *= -0.8;
+                    }
+
+                    // Kollisionsabfrage linke Wand
+                    if(strecke.x <= 0 + radius) {
+                        if(geschwindigkeit.x < 0.3f && geschwindigkeit.x > -0.3f || geschwindigkeit.x == 0) {
+                            marble.geschwindigkeit.x = 0;
+                            break;
+                        }
 
                         // Energieverlust
+                        double h = Math.abs(geschwindigkeit.x) * -0.8;
+                        geschwindigkeit.x = h;
+                        // Abprallen an der Wand
                         geschwindigkeit.x *= -0.8;
-                        geschwindigkeit.y *= -0.8;
+
+                        // Kugel auf der x-Achse zurücksetzen, um eine Überlappung zu verhindern
+                        if (strecke.x < 0 + radius) {
+                            strecke.x = radius;
+                        } else {
+                            strecke.x = getSceneWidth() - radius;
+                        }
                     }
 
                     marble.update(strecke, geschwindigkeit);
