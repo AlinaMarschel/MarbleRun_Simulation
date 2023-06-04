@@ -24,8 +24,10 @@
             <Label layoutX="674.0" layoutY="40.0" text="Position Y:" />
             <Label fx:id="setTextPosY" layoutX="744.0" layoutY="40.0" prefHeight="17.0" prefWidth="42.0" text="" />
          </children></AnchorPane>
+
       <AnchorPane layoutX="7.0" prefHeight="510.0" prefWidth="290.0">
          <children>
+
             <VBox prefHeight="876.0" prefWidth="290.0" spacing="20.0" AnchorPane.bottomAnchor="504.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Label prefHeight="52.0" prefWidth="300.0" text="Marble Run" textAlignment="CENTER">
@@ -52,30 +54,35 @@
                            </font>
                         </Label>
                         <Slider fx:id="Slider" max="30" min="5" minorTickCount="5" prefHeight="38.0" prefWidth="262.0" showTickLabels="true" showTickMarks="true" value="5.0" />
-                        <VBox>
-                           <children>
-                              <Label text="X-Position:">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <TextField prefWidth="100.0" promptText="250" text="250" fx:id="xposition" />
-                           </children>
-                        </VBox>
-                        <VBox>
-                           <children>
-                              <Label text="Y-Position:">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="yposition" prefWidth="100.0" promptText="600" text="600">
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
-                              </TextField>
-                           </children>
-                        </VBox>
+
+                        <HBox>
+                           <VBox>
+                              <children>
+                                 <Label text="X-Position:">
+                                    <font>
+                                       <Font size="16.0" />
+                                    </font>
+                                 </Label>
+                                 <TextField prefWidth="100.0" promptText="250" text="250" fx:id="xposition" />
+                              </children>
+                           </VBox>
+
+                           <VBox>
+                              <children>
+                                 <Label text="Y-Position:">
+                                    <font>
+                                       <Font size="16.0" />
+                                    </font>
+                                 </Label>
+                                 <TextField fx:id="yposition" prefWidth="100.0" promptText="600" text="600">
+                                    <opaqueInsets>
+                                       <Insets />
+                                    </opaqueInsets>
+                                 </TextField>
+                              </children>
+                           </VBox>
+                        </HBox>
+
                         <HBox>
                            <children>
                               <VBox>
@@ -101,6 +108,15 @@
                            </children>
                         </HBox>
                      </children>
+                     <HBox>
+                        <children>
+                           <Button id="createBallButton" mnemonicParsing="false" onAction="#createMarble" prefHeight="11.0" prefWidth="108.0" text="Erstelle Kugel">
+                              <VBox.margin>
+                                 <Insets left="80.0" top="20.0" />
+                              </VBox.margin>
+                           </Button>
+                        </children>
+                     </HBox>
                   </VBox>
                   <Label prefHeight="14.0" prefWidth="270.0" text="Ebene Einstellungen" textAlignment="CENTER">
                      <font>
@@ -121,37 +137,52 @@
                      <children>
                         <VBox>
                            <children>
-                              <Label text="X-Position">
+                              <Label text="Start X">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="obstacleX" prefWidth="100.0" promptText="0" text="250" />
+                              <TextField fx:id="startX" prefWidth="100.0" promptText="0" text="250" />
                            </children>
                         </VBox>
                         <VBox>
                            <children>
-                              <Label text="Y-Position:">
+                              <Label text="StartY">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="obstacleY" prefWidth="100.0" promptText="0" text="400" />
+                              <TextField fx:id="startY" prefWidth="100.0" promptText="0" text="250" />
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <Label text="End X">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="endX" prefWidth="100.0" promptText="0" text="250" />
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <Label text="EndY">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="endY" prefWidth="100.0" promptText="0" text="250" />
                            </children>
                         </VBox>
                      </children>
                   </HBox>
                   <HBox>
-                  <Button id="createBallButton" mnemonicParsing="false" onAction="#createMarble" prefHeight="11.0" prefWidth="108.0" text="Erstelle Kugel">
-                     <VBox.margin>
-                        <Insets left="80.0" top="20.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button id="createObstacleButton" mnemonicParsing="false" onAction="#createObstacle" prefHeight="25.0" prefWidth="111.0" text="Erstelle Ebene">
-                     <VBox.margin>
-                        <Insets left="80.0" top=".0" />
-                     </VBox.margin>
-                  </Button>
+                     <Button id="createObstacleButton" mnemonicParsing="false" onAction="#createObstacle" prefHeight="25.0" prefWidth="111.0" text="Erstelle Ebene">
+                        <VBox.margin>
+                           <Insets left="80.0" top=".0" />
+                        </VBox.margin>
+                     </Button>
                   </HBox>
                   <Label layoutX="20.0" layoutY="419.0" prefHeight="14.0" prefWidth="270.0" text="Umgebung" textAlignment="CENTER">
                      <font>

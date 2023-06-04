@@ -26,8 +26,10 @@ public class Controller {
     @FXML TextField windX;
 
     // Obstacle Properties
-    @FXML TextField obstacleX;
-    @FXML TextField obstacleY;
+    @FXML TextField startX;
+    @FXML TextField startY;
+    @FXML TextField endX;
+    @FXML TextField endY;
     @FXML TextField angle;
 
     // Show Speed and Position
@@ -42,7 +44,19 @@ public class Controller {
     {
         this.simulation = new Simulation(-9.81d, this, sceneParent);
         this.simulator = new AnimationLoop(this.simulation);
-        //createObstacle();
+
+        // Unten
+        new MRLine(0,0,800,0);
+        // Links
+        new MRLine(0,0,0, 800);
+        // Oben
+        new MRLine(0,800,800,800);
+        // Rechts
+        new MRLine(800,0,800,800);
+
+        for (MRLine line : MRLine.lines) {
+            canvas.getChildren().add(line.representation);
+        }
     }
 
     public void startSimulation()
@@ -106,16 +120,26 @@ public class Controller {
     // Hindernisse werden der Scene hinzugefügt
     public void createObstacle()
     {
-        Obstacle obstacle = new Obstacle(
-                Double.parseDouble(obstacleX.getText() ),
-                Double.parseDouble(obstacleY.getText() ),
-                400,
-                10,
-                Double.parseDouble(angle.getText() ));
-        obstacle.box.getBoundsInParent();
-        simulation.addObject(obstacle);
-        canvas.getChildren().addAll(obstacle.box);
-        canvas.getChildren().addAll(obstacle.line);
+//        Obstacle obstacle = new Obstacle(
+//                Double.parseDouble(obstacleX.getText() ),
+//                Double.parseDouble(obstacleY.getText() ),
+//                400,
+//                10,
+//                Double.parseDouble(angle.getText() ));
+//        obstacle.box.getBoundsInParent();
+//        simulation.addObject(obstacle);
+//        canvas.getChildren().addAll(obstacle.box);
+//        canvas.getChildren().addAll(obstacle.line);
+
+        MRLine line = new MRLine(
+                Double.parseDouble(startX.getText()),
+                Double.parseDouble(startY.getText()),
+                Double.parseDouble(endX.getText()),
+                Double.parseDouble(endY.getText())
+        );
+
+        canvas.getChildren().add(line.representation);
+
     }
 
     // Positionswerte der Kugel wird angezeigt
