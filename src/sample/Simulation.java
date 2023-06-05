@@ -22,12 +22,6 @@ public class Simulation {
         this.scene = scene;
     }
 
-    // Höhe der Scene wird berechnet
-    public double getSceneWidth() {
-        double sceneWitdhUmgerechnet = 800/100;
-        return sceneWitdhUmgerechnet;
-    }
-
     public void update()
     {
 
@@ -42,10 +36,10 @@ public class Simulation {
         Marble.marble.move(zeit, gravity);
 
         for (MRLine line : MRLine.lines) {
-            Marble.marble.checkCollision(line);
+            Marble.marble.checkAndHandleCollision(line);
         }
 
-        System.out.println("-------------");
+//        System.out.println("-------------");
 
 //        controller.setText(marble.geschwindigkeit, marble.vecPos);
 //

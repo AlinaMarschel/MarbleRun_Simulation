@@ -55,7 +55,7 @@ public class Controller {
         new MRLine(800,0,800,800);
 
         for (MRLine line : MRLine.lines) {
-            canvas.getChildren().add(line.representation);
+            canvas.getChildren().add(line.darstellung);
         }
     }
 
@@ -103,34 +103,23 @@ public class Controller {
             // Kugel wird erstellt
             Marble marble = new Marble(
                     vectorMarble,               // Positionsvektor
-                    radius,     // radius
+                    radius,                     // radius
                     Color.getValue(),           // Farbe
                     vecGeschwindigkeit,         // Geschwindigkeitsvektor
                     vecWind                     // Windbeschleunigungsvektor
             );
 
-            marble.update(vectorMarble, vecGeschwindigkeit);
+            marble.move(simulation.zeit, simulation.gravity);
             // Kugel wird zur Simulation hinzugefügt
             simulation.addObject(marble);
             canvas.getChildren().addAll(marble.circle);
-            System.out.println(marble.toString());
+            /*System.out.println(marble.toString());*/
         }
     }
 
     // Hindernisse werden der Scene hinzugefügt
     public void createObstacle()
     {
-//        Obstacle obstacle = new Obstacle(
-//                Double.parseDouble(obstacleX.getText() ),
-//                Double.parseDouble(obstacleY.getText() ),
-//                400,
-//                10,
-//                Double.parseDouble(angle.getText() ));
-//        obstacle.box.getBoundsInParent();
-//        simulation.addObject(obstacle);
-//        canvas.getChildren().addAll(obstacle.box);
-//        canvas.getChildren().addAll(obstacle.line);
-
         MRLine line = new MRLine(
                 Double.parseDouble(startX.getText()),
                 Double.parseDouble(startY.getText()),
@@ -138,8 +127,8 @@ public class Controller {
                 Double.parseDouble(endY.getText())
         );
 
-        canvas.getChildren().add(line.representation);
-
+        canvas.getChildren().add(line.darstellung);
+        System.out.println(line.berechnung);
     }
 
     // Positionswerte der Kugel wird angezeigt
