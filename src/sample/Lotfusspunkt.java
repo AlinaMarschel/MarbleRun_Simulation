@@ -45,7 +45,4 @@ public class Lotfusspunkt {
         return new Lotfusspunkt(lotfusspunkt, abstand, faktor);
     }
 
-//    public String toString() {
-//        return "Abstand = " + abstand + "; Faktor = " + faktor + "; LFP = " + lotfusspunkt;
-//    }
 }

@@ -53,7 +53,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Slider fx:id="Slider" max="30" min="5" minorTickCount="5" prefHeight="38.0" prefWidth="262.0" showTickLabels="true" showTickMarks="true" value="5.0" />
+                        <Slider fx:id="Slider" max="30" min="5" minorTickCount="5" prefHeight="38.0" prefWidth="262.0" showTickLabels="true" showTickMarks="true" value="30.0" />
 
                         <HBox>
                            <VBox>
@@ -74,7 +74,7 @@
                                        <Font size="16.0" />
                                     </font>
                                  </Label>
-                                 <TextField fx:id="yposition" prefWidth="100.0" promptText="600" text="600">
+                                 <TextField fx:id="yposition" prefWidth="100.0" promptText="30" text="30">
                                     <opaqueInsets>
                                        <Insets />
                                     </opaqueInsets>

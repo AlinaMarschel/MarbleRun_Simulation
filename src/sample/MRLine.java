@@ -14,8 +14,8 @@ public class MRLine {
     private double pixelPerMeter = 100;
 
     public MRLine(double startX, double startY, double endX, double endY) {
-        darstellung = new Line(startX, startY, endX, endY);
-        berechnung = new Line(startX / pixelPerMeter, 8 - startY / pixelPerMeter, endX / pixelPerMeter, 8 - endY / pixelPerMeter);
+        darstellung = new Line(startX, 800 - startY, endX, 800 - endY);
+        berechnung = new Line(startX / pixelPerMeter, startY / pixelPerMeter, endX / pixelPerMeter, endY / pixelPerMeter);
         MRLine.lines.add(this);
     }
 
@@ -38,6 +38,22 @@ public class MRLine {
     public Point2D getEndPoint() {
         Point2D endPoint = new Point2D(berechnung.getEndX(), berechnung.getEndY());
         return endPoint;
+    }
+
+    public double getAngle() {
+
+        double hoehe = Math.abs(darstellung.getEndY() - darstellung.getStartY());
+        double breite = Math.abs(darstellung.getEndX() - darstellung.getStartX());
+        double laenge = Math.sqrt(Math.pow(hoehe,2) + Math.pow(breite,2));
+
+        /*System.out.println("Hoehe: " + hoehe);
+        System.out.println("Breite: " + breite);
+        System.out.println("Laenge: " + laenge);*/
+
+        double winkel = hoehe/laenge;
+        double winkelEbene = Math.toDegrees(Math.sin(winkel));
+
+        return winkelEbene;
     }
 
 }

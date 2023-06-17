@@ -14,6 +14,12 @@ public class Marble extends Object {
     Point2D nextVecPos;
     double radius; // m
     double pixelPerMeter = 100;
+    MRLine kollisionslinie = new MRLine(
+            0,0,1000,0
+    );
+    double schwellenwertRollen = 3;
+    double reibungskoeffizient = 0.011; // Autoreifen auf Asphalt
+    boolean isRolling;
     Color color;
     Circle circle;
 
@@ -41,7 +47,7 @@ public class Marble extends Object {
 
     public void move(double zeit, Vector2D schwerkraft) {
         //Berechnung der Position
-        vecPos.x += geschwindigkeit.x * zeit + 0.5 * Math.pow(zeit,2);
+        vecPos.x += geschwindigkeit.x * zeit + 0.5 * wind.x * Math.pow(zeit,2);
         vecPos.y += geschwindigkeit.y * zeit + 0.5 * schwerkraft.y * Math.pow(zeit,2);
 
         nextVecPos = new Point2D((vecPos.x + geschwindigkeit.x * zeit + 0.5 * Math.pow(zeit,2)),(vecPos.y + geschwindigkeit.y * zeit + 0.5 * schwerkraft.y * Math.pow(zeit,2)));
@@ -49,6 +55,54 @@ public class Marble extends Object {
         //Berechnung der Geschwindigkeit
         geschwindigkeit.x += marble.wind.x * zeit;
         geschwindigkeit.y += schwerkraft.y * zeit;
+
+        // die Position der Kugel in X-Richtung wird aktualisiert
+        this.circle.setCenterX(vecPos.x * pixelPerMeter);
+        // die Position der Kugel in Y-Richtung wird aktualisiert
+        this.circle.setCenterY((800 / pixelPerMeter - vecPos.y) * pixelPerMeter);
+    }
+
+    public double getMarbleAngle() {
+
+        double ankatethe = marble.vecPos.x;
+        double gegenkathete = marble.vecPos.y;
+        double hypothenuse = Math.sqrt(Math.pow(ankatethe,2) + Math.pow(gegenkathete,2));
+
+        double winkel = gegenkathete/hypothenuse;
+        double richtungsWinkel = Math.toDegrees(Math.acos(winkel));
+
+        return richtungsWinkel;
+    }
+
+    public void roll(double zeit, Vector2D schwerkraft) {
+        System.out.println("isch rolle");
+
+        double alpha = kollisionslinie.getAngle();
+        System.out.println("Alpha = " + alpha);
+
+        double hypothenuse = schwerkraft.y;
+        double gegenkathete = Math.sin(Math.toRadians(alpha)) * hypothenuse;
+        double ankathete = Math.cos(Math.toRadians(alpha)) * hypothenuse;
+
+        double neueAnkatheteX = Math.cos(Math.toRadians(alpha)) * gegenkathete;
+        double neueGegenkatheteY = Math.sqrt(Math.pow(gegenkathete,2) - Math.pow(neueAnkatheteX,2));
+
+        Point2D hangabtriebskraft = new Point2D(neueAnkatheteX,neueGegenkatheteY);
+
+        //System.out.println(hangabtriebskraft);
+        double reibungsBeschleunigung = ankathete * reibungskoeffizient;
+        System.out.println("a_N * muh = " + reibungsBeschleunigung);
+
+        if(reibungsBeschleunigung >= gegenkathete && geschwindigkeit.getLength() == 0) {
+            System.out.println("Liegen Bleiben! Hände hoch");
+        }
+
+        vecPos.x += geschwindigkeit.x * zeit + 0.5 * hangabtriebskraft.getX() * Math.pow(zeit,2);
+        vecPos.y += geschwindigkeit.y * zeit + 0.5 * hangabtriebskraft.getY() * Math.pow(zeit,2);
+
+        //Berechnung der neuen Geschwindigkeit
+        geschwindigkeit.x += (hangabtriebskraft.getX() + reibungsBeschleunigung) * zeit;
+        geschwindigkeit.y += (hangabtriebskraft.getY() + reibungsBeschleunigung) * zeit;
 
         // die Position der Kugel in X-Richtung wird aktualisiert
         this.circle.setCenterX(vecPos.x * pixelPerMeter);
@@ -68,34 +122,27 @@ public class Marble extends Object {
             /*System.out.println("no collision");*/
             return;
         } else {
-            //System.out.println("Kollision");
-            //Point2D abstandsVektor = lotfusspunkt.lotfusspunkt.subtract(vecPos.x,vecPos.y);
+
+            Lotfusspunkt lotfusspunktNextFrame = Lotfusspunkt.getLotfusspunkt(new Point2D(nextVecPos.getX(),nextVecPos.getY()),line);
+
+            if(lotfusspunkt.abstand < lotfusspunktNextFrame.abstand) {
+                return;
+            }
+
+            if(Math.abs(getMarbleAngle() - line.getAngle()) <= schwellenwertRollen) {
+                isRolling = true;
+                kollisionslinie = line;
+                /*System.out.println("Rollen");*/
+                return;
+            }
+
             MRLine abstandsLinie = new MRLine(new Point2D(vecPos.x,vecPos.y),lotfusspunkt.lotfusspunkt);
             Point2D naechstePosition = new Point2D(vecPos.x + geschwindigkeit.x, vecPos.y + geschwindigkeit.y);
 
-            /*System.out.println("np" + naechstePosition);
-            System.out.println("al" + abstandsLinie.representation);*/
-
             Lotfusspunkt hilfsLotfusspunkt = Lotfusspunkt.getLotfusspunkt(naechstePosition, abstandsLinie);
-
-//            System.out.println(hilfsLotfusspunkt);
-
-//            System.out.println("Kugel ("+ vecPos.x +":"+ vecPos.y +")");
-//            System.out.println("HLP   ("+ hilfsLotfusspunkt.lotfusspunkt.getX() +":"+ hilfsLotfusspunkt.lotfusspunkt.getY() +")");
-//            System.out.println("nP    ("+ naechstePosition.getX() +":"+ naechstePosition.getY() +")");
-
-            /*System.out.println("Abstandslinie Start: " + abstandsLinie.representation.getStartX() + ":" + abstandsLinie.representation.getStartY());
-            System.out.println("Abstandslinie Start: " + abstandsLinie.representation.getEndX() + ":" + abstandsLinie.representation.getEndY());
-            System.out.println("Hilfslot: " + hilfsLotfusspunkt.lotfusspunkt.getY());
-            System.out.println("nächste Pos.: " + naechstePosition.getY());*/
 
             Point2D orthogonal = new Point2D(vecPos.x,vecPos.y).subtract(hilfsLotfusspunkt.lotfusspunkt);
             Point2D parallel = naechstePosition.subtract(hilfsLotfusspunkt.lotfusspunkt);
-
-//            System.out.println("orthogonal: " + orthogonal);
-//            System.out.println("parallel: " + parallel);
-
-
 
             Point2D neueGeschwindigkeit = orthogonal.add(parallel);
 
