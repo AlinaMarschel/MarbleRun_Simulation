@@ -54,6 +54,9 @@ public class Controller {
         // Rechts
         new MRLine(800,0,800,800);
 
+        // Rollen auf der Schiefen Ebene am Start
+        new MRLine(0,500,150,450);
+
         for (MRLine line : MRLine.lines) {
             canvas.getChildren().add(line.darstellung);
         }

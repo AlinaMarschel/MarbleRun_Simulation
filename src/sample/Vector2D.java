@@ -107,9 +107,10 @@ public class Vector2D {
         return new Vector2D(this.x + v.x, this.y + v.y);
     }
 
-    public void subtract(Vector2D v) {
+    public Vector2D subtract(Vector2D v) {
         this.x -= v.x;
         this.y -= v.y;
+        return v;
     }
 
     public void subtract(double vx, double vy) {

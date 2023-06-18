@@ -63,7 +63,7 @@
                                        <Font size="16.0" />
                                     </font>
                                  </Label>
-                                 <TextField prefWidth="100.0" promptText="250" text="250" fx:id="xposition" />
+                                 <TextField prefWidth="100.0" promptText="30" text="30" fx:id="xposition" />
                               </children>
                            </VBox>
 
@@ -74,7 +74,7 @@
                                        <Font size="16.0" />
                                     </font>
                                  </Label>
-                                 <TextField fx:id="yposition" prefWidth="100.0" promptText="30" text="30">
+                                 <TextField fx:id="yposition" prefWidth="100.0" promptText="522" text="522">
                                     <opaqueInsets>
                                        <Insets />
                                     </opaqueInsets>
@@ -92,7 +92,7 @@
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="startSpeedX" prefHeight="25.0" prefWidth="112.0" promptText="1" text="1" />
+                                    <TextField fx:id="startSpeedX" prefHeight="25.0" prefWidth="112.0" promptText="0" text="0" />
                                  </children>
                               </VBox>
                               <VBox>
@@ -102,7 +102,7 @@
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="startSpeedY" prefHeight="25.0" prefWidth="117.0" promptText="1" text="1" />
+                                    <TextField fx:id="startSpeedY" prefHeight="25.0" prefWidth="117.0" promptText="0" text="0" />
                                  </children>
                               </VBox>
                            </children>
@@ -162,7 +162,7 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="endX" prefWidth="100.0" promptText="0" text="250" />
+                              <TextField fx:id="endX" prefWidth="100.0" promptText="0" text="450" />
                            </children>
                         </VBox>
                         <VBox>

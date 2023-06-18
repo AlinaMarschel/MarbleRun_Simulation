@@ -1,8 +1,6 @@
 package sample;
 
-import javafx.geometry.Point2D;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
@@ -26,20 +24,27 @@ public class Simulation {
     public void update()
     {
 
+        for (Marble marble : Marble.marbles) {
+            if(marble.isRolling) {
+                marble.roll(zeit, gravity);
+            } else {
+                marble.move(zeit, gravity);
+            }
 
-        Marble.marble.roll(zeit, gravity);
+            for (Marble marbleKollision : Marble.marbles) {
+                if (marbleKollision != marble && !marble.kollisionsmarble.contains(marbleKollision)) {
+                    marble.checkAndHandleCollision(marbleKollision);
+                }
+            }
 
-//        if(Marble.marble.isRolling) {
-//            Marble.marble.roll(gravity);
-//        } else {
-//            Marble.marble.move(zeit, gravity);
-//        }
-
-        for (MRLine line : MRLine.lines) {
-            Marble.marble.checkAndHandleCollision(line);
+            for (MRLine line : MRLine.lines) {
+                marble.checkAndHandleCollision(line);
+            }
         }
-
-        controller.setText(Marble.marble.geschwindigkeit, Marble.marble.vecPos);
+        for (Marble marble : Marble.marbles) {
+            marble.kollisionsmarble.clear();
+        }
+        controller.setText(Marble.marbles.get(Marble.marbles.size() - 1).geschwindigkeit, Marble.marbles.get(Marble.marbles.size() - 1).vecPos);
 
         frames++;
     }

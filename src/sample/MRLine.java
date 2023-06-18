@@ -19,13 +19,6 @@ public class MRLine {
         MRLine.lines.add(this);
     }
 
-//    public MRLine(double startX, double startY, double endX, double endY, String name) {
-//        darstellung = new Line(startX, startY, endX, endY);
-//        berechnung = new Line(startX / pixelPerMeter, startY / pixelPerMeter, endX / pixelPerMeter, endY / pixelPerMeter);
-//        this.name = name;
-//        MRLine.lines.add(this);
-//    }
-
     public MRLine(Point2D startvektor, Point2D endvektor) {
         berechnung = new Line(startvektor.getX(), startvektor.getY(), endvektor.getX(), endvektor.getY());
     };
