@@ -34,14 +34,9 @@ public class MRLine {
     }
 
     public double getAngle() {
-
         double hoehe = Math.abs(darstellung.getEndY() - darstellung.getStartY());
         double breite = Math.abs(darstellung.getEndX() - darstellung.getStartX());
         double laenge = Math.sqrt(Math.pow(hoehe,2) + Math.pow(breite,2));
-
-        /*System.out.println("Hoehe: " + hoehe);
-        System.out.println("Breite: " + breite);
-        System.out.println("Laenge: " + laenge);*/
 
         double winkel = hoehe/laenge;
         double winkelEbene = Math.toDegrees(Math.sin(winkel));

@@ -47,6 +47,19 @@ public class Marble extends Object {
         return "Position: " + this.vecPos.x + "|" + this.vecPos.y + " Radius: " + this.radius;
     }
 
+    public double getMarbleAngle() {
+
+        double ankatethe = vecPos.x;
+        double gegenkathete = vecPos.y;
+        double hypothenuse = Math.sqrt(Math.pow(ankatethe,2) + Math.pow(gegenkathete,2));
+
+        double winkel = gegenkathete/hypothenuse;
+        double richtungsWinkel = Math.toDegrees(Math.acos(winkel));
+
+        return richtungsWinkel;
+    }
+
+    // Move Methode für die Kugel
     public void move(double zeit, Vector2D schwerkraft) {
         //Berechnung der Position
         vecPos.x += geschwindigkeit.x * zeit + 0.5 * wind.x * Math.pow(zeit,2);
@@ -64,21 +77,12 @@ public class Marble extends Object {
         this.circle.setCenterY((800 / pixelPerMeter - vecPos.y) * pixelPerMeter);
     }
 
-    public double getMarbleAngle() {
-
-        double ankatethe = vecPos.x;
-        double gegenkathete = vecPos.y;
-        double hypothenuse = Math.sqrt(Math.pow(ankatethe,2) + Math.pow(gegenkathete,2));
-
-        double winkel = gegenkathete/hypothenuse;
-        double richtungsWinkel = Math.toDegrees(Math.acos(winkel));
-
-        return richtungsWinkel;
-    }
-
+    // Roll Methode für die Kugel
     public void roll(double zeit, Vector2D schwerkraft) {
 
+        // Winkel der Ebene
         double alpha = kollisionslinie.getAngle();
+
 
         double hypothenuse = Math.abs(schwerkraft.y);
         double gegenkathete = Math.sin(Math.toRadians(alpha)) * hypothenuse;
@@ -98,13 +102,13 @@ public class Marble extends Object {
 
         // Wind
         double ankatheteWind = Math.cos(Math.toRadians(alpha)) * wind.x;
-        //double gegenkatheteWind = Math.sin(Math.toRadians(alpha)) * wind.x;
 
         double windX = Math.cos(Math.toRadians(alpha)) * ankatheteWind;
         double windY = Math.sin(Math.toRadians(alpha)) * ankatheteWind;
 
         Point2D windBeschleunigung = new Point2D(windX,windY);
 
+        // Hier wird überprüft, in welche Richtung die Kugel rollt
         // nach rechts oben
         if(vecPos.x <= nextVecPos.getX() && vecPos.y <= nextVecPos.getY()) {
             // Reibung wirkt nach links unten
@@ -130,12 +134,13 @@ public class Marble extends Object {
             reibungY = Math.abs(reibungY);
         }
 
+        // Reibungskraft, Hangabtriebskraft und Windbeschleunigung werden addiert
         Point2D reibung = new Point2D(reibungX,reibungY);
         Point2D gesamtBeschleunigung = hangabtriebskraft.add(reibung).add(windBeschleunigung);
 
+        // Position der Kugel wird aktualisiert
         vecPos.x += geschwindigkeit.x * zeit + 0.5 * gesamtBeschleunigung.getX() * Math.pow(zeit,2);
         vecPos.y += geschwindigkeit.y * zeit + 0.5 * gesamtBeschleunigung.getY() * Math.pow(zeit,2);
-
 
         // Kugel fällt nicht durch horizontale Linien
         if(kollisionslinie.getStartPoint().getY() == kollisionslinie.getEndPoint().getY()) {
@@ -150,13 +155,13 @@ public class Marble extends Object {
             geschwindigkeit.y = 0;
         }
 
+        // Neuer Lotfußpunkt wird erstellt, um eine Abbruchbedingung aufzustellen
         Lotfusspunkt lotfusspunkt = Lotfusspunkt.getLotfusspunkt(new Point2D(vecPos.x, vecPos.y),kollisionslinie);
 
         if(lotfusspunkt.faktor > 1 || lotfusspunkt.faktor < 0 || lotfusspunkt.abstand > radius/pixelPerMeter) {
             isRolling = false;
             return;
         }
-
 
         //Berechnung der neuen Geschwindigkeit
         geschwindigkeit.x += gesamtBeschleunigung.getX() * zeit;
@@ -171,13 +176,9 @@ public class Marble extends Object {
     public void checkAndHandleCollision(MRLine line) {
 
         Lotfusspunkt lotfusspunkt = Lotfusspunkt.getLotfusspunkt(new Point2D(vecPos.x,vecPos.y),line);
-        /*System.out.println("Abstand: " + lotfusspunkt.abstand);
-        System.out.println("Faktor: " + lotfusspunkt.faktor);*/
 
         // Wenn der Faktor kleiner 0 oder größer 1 ist, findet keine Kollision statt.
-        // Todo: Schwellenwert anpassen, damit die Kugel nicht durch die Ebene glitscht. hinter px pro meter
         if(lotfusspunkt.faktor > 1 || lotfusspunkt.faktor < 0 || lotfusspunkt.abstand > radius/pixelPerMeter) {
-            /*System.out.println("no collision");*/
             return;
         } else {
             Lotfusspunkt lotfusspunktNextFrame = Lotfusspunkt.getLotfusspunkt(new Point2D(nextVecPos.getX(),nextVecPos.getY()),line);
@@ -202,17 +203,13 @@ public class Marble extends Object {
 
             Point2D neueGeschwindigkeit = orthogonal.add(parallel);
 
-//            System.out.println("Geschwindigkeit vorher: (" + geschwindigkeit.x + ":" + geschwindigkeit.y + ")");
-
             geschwindigkeit.x = neueGeschwindigkeit.getX();
             geschwindigkeit.y = neueGeschwindigkeit.getY();
 
-//            System.out.println("Geschwindigkeit nachher: (" + geschwindigkeit.x + ":" + geschwindigkeit.y + ")");
         }
     }
 
     public void checkAndHandleCollision(Marble marble) {
-
         Vector2D beruehrungsnormale = Vector2D.subtract(marble.vecPos,vecPos);
         double abstand = beruehrungsnormale.getLength();
 
@@ -248,10 +245,6 @@ public class Marble extends Object {
             Point2D neueGeschwindigkeitKollisionsKugel = nextVecPosKollisionsKugel.subtract(lotfusspunktKollisionsKugel.lotfusspunkt).add(new Point2D(marble.vecPos.x, marble.vecPos.y).subtract(lotfusspunktKollisionsKugel.lotfusspunkt));
             marble.geschwindigkeit.x = neueGeschwindigkeitKollisionsKugel.getX();
             marble.geschwindigkeit.y = neueGeschwindigkeitKollisionsKugel.getY();
-
         }
-
     }
-
-
 }
